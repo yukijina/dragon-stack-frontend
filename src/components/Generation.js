@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
+const DEFAULT_GENERATION = { generationId: '', expiration: ''}
+
 class Generation extends Component {
   state = {
-    generation: { generationId: 999, expiration: '2020-05-01'}
+    generation: DEFAULT_GENERATION
   };
 
   componentDidMount() {
@@ -12,7 +14,12 @@ class Generation extends Component {
   fetchGeneration = () => {
     console.log("hitting")
     fetch('http://localhost:3000/generation')
-    .then(response => console.log('response', response));
+    .then(response => response.json())
+    .then(json => { 
+      console.log('json:', json)
+      this.setState({ generation: json.generation })
+    })
+    .catch(err => console.log('error:', error));
   }
 
 
