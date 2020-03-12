@@ -6,10 +6,11 @@ class Generation extends Component {
   };
 
   componentDidMount() {
-    this.fetchGeneration
+    this.fetchGeneration()
   }
 
   fetchGeneration = () => {
+    console.log("hitting")
     fetch('http://localhost:3000/generation')
     .then(response => console.log('response', response));
   }
