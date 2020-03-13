@@ -39,6 +39,7 @@ class Generation extends Component {
       delay = MININUM_DELAY
     }
 
+    /// create generation automatically
     this.timer = setTimeout(() => this.fetchNextGeneration(), delay);
   }
 
