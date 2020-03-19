@@ -21,25 +21,15 @@ class Generation extends Component {
     clearTimeout(this.timer);
   }
 
-  fetchGeneration = () => {
-    fetch('http://localhost:3000/generation')
-    .then(response => response.json())
-    .then(json => { 
-      // this.setState({ generation: json.generation })
-      this.props.dispatchGeneration(json.generation)
-    })
-    .catch(err => console.log('error:', err));
-  }
-
   fetchNextGeneration = () => {
-    this.fetchGeneration();
+    this.props.fetchGeneration();
 
     let delay = new Date(this.props.generation.expiration).getTime() - new Date().getTime();
 
     if (delay < MININUM_DELAY) {
       delay = MININUM_DELAY
     }
-
+    console.log('props!: ', this.props)
     /// create generation automatically
     this.timer = setTimeout(() => this.fetchNextGeneration(), delay);
   }
@@ -62,16 +52,22 @@ const mapStateToProps = state => {
   const generation = state.generation;
   return { generation }
 }
-
   
-const mapDispatchToProps = dispatch => {
-  return {
-    dispatchGeneration: generation => dispatch(
-      generationActionCreator(generation)
-    )
-  }  
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     fetchGeneration: () => fetchGeneration(dispatch)
+//   }  
+// }
+
+const fetchGeneration = () => dispatch => {
+  return fetch ('http://localhost:3000/generation')
+  .then(response => response.json())
+  .then(json => {
+    dispatch(generationActionCreator(json.generation))
+  })
+  .catch(err => console.log("error!: ", err))
 }
 
-const componentConnector = connect(mapStateToProps, mapDispatchToProps);
+const componentConnector = connect(mapStateToProps, { fetchGeneration });
 
 export default componentConnector(Generation);

@@ -1,20 +1,20 @@
 import React from 'react';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { render } from 'react-dom';
+import thunk from 'redux-thunk';
 import Generation from './components/Generation';
 import Dragon from './components/Dragon';
 import { generationReducer } from './reducers';
-import { generationActionCreator } from './actions/generation'
+// import { generationActionCreator } from './actions/generation'
 import './index.css';
 
-const store = createStore(
-  generationReducer, 
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  );
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(generationReducer, composeEnhancers(applyMiddleware(thunk)));
 
 /// subscribe should be called before dispatch
-store.subscribe(() => console.log('store state update: ', store.getState()));
+//store.subscribe(() => console.log('store state update: ', store.getState()));
 
 /// debugging purpose
 // store.dispatch({ type: 'foo' });
@@ -28,11 +28,11 @@ store.subscribe(() => console.log('store state update: ', store.getState()));
 // })
 //store.dispatch(zooAction)
 
-fetch('http://localhost:3000/generation')
-.then(response => response.json())
-.then(json => {
-  store.dispatch(generationActionCreator(json.generation))
-});
+// fetch('http://localhost:3000/generation')
+// .then(response => response.json())
+// .then(json => {
+//   store.dispatch(generationActionCreator(json.generation))
+// });
 
 render(
   <Provider store={store}>
