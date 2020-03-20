@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { generationActionCreator } from '../actions/generation';
-
-const DEFAULT_GENERATION = { generationId: '', expiration: ''}
+import { fetchGeneration } from '../actions/generation';
 
 const MININUM_DELAY = 3000;
 

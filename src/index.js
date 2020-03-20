@@ -5,13 +5,13 @@ import { render } from 'react-dom';
 import thunk from 'redux-thunk';
 import Generation from './components/Generation';
 import Dragon from './components/Dragon';
-import { generationReducer } from './reducers';
+import rootReducer from './reducers';
 // import { generationActionCreator } from './actions/generation'
 import './index.css';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(generationReducer, composeEnhancers(applyMiddleware(thunk)));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
 /// subscribe should be called before dispatch
 //store.subscribe(() => console.log('store state update: ', store.getState()));
