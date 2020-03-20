@@ -59,15 +59,6 @@ const mapStateToProps = state => {
 //   }  
 // }
 
-const fetchGeneration = () => dispatch => {
-  return fetch ('http://localhost:3000/generation')
-  .then(response => response.json())
-  .then(json => {
-    dispatch(generationActionCreator(json.generation))
-  })
-  .catch(err => console.log("error!: ", err))
-}
-
 const componentConnector = connect(mapStateToProps, { fetchGeneration });
 
 export default componentConnector(Generation);
