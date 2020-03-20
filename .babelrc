@@ -1,4 +1,5 @@
 {
   "presets": ["env", "react"],
-  "plugins": ["transform-class-properties"]
+  // spread - for sprad operator {...state}
+  "plugins": ["transform-class-properties", "transform-object-rest-spread"]
 }
