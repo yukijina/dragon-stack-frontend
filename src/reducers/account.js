@@ -1,10 +1,10 @@
-import { ACCOUNT } from '../accounts/types';
+import { ACCOUNT } from '../actions/types';
 import fetchStates from './fetchStates';
 
 const DEFAULT_ACCOUNT = { loggedIn: false};
 
 const account = (state = DEFAULT_ACCOUNT, action) => {
-  switch(action, type) {
+  switch(action.type) {
     case ACCOUNT.FETCH:
       return { ...state, status: fetchStates.fetching}
     case ACCOUNT.FETCH_ERROR:

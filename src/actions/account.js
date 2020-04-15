@@ -1,7 +1,7 @@
 import { ACCOUNT } from './types';
 import { BACKEND } from '../config';
 
-const signup = ({ username, password }) => dispatch => {
+export const signup = ({ username, password }) => dispatch => {
   dispatch({ type: ACCOUNT.FETCH });
 
   return fetch(`${BACKEND.ADDRESS}/account/signup`, {
@@ -17,7 +17,8 @@ const signup = ({ username, password }) => dispatch => {
     } else {
       dispatch({ type: ACCOUNT.FETCH_SUCCESS, ...json})
     }
-  }).catch(error => {
-    dispatch({ type: ACCOUNT.FETCH_ERROR, message: error.message})
-  })
+  }).catch(error => dispatch({
+    type: ACCOUNT.FETCH_ERROR, message: error.message
+  }))
 }
+
