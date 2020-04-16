@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, FormGroup, FormControl } from 'react-bootstrap';
 import { signup } from '../actions/account';
+import fetchStates from '../reducers/fetchStates';
 
 class AuthForm extends Component {
   state = { username: '', password: '' };
@@ -21,6 +22,14 @@ class AuthForm extends Component {
 
   login = () => {
     console.log('login this.state: ', this.state)
+  }
+
+  // getter for javascript
+  get Error() {
+    if (this.props.account.status === fetchStates.error) {
+      return <div>{this.props.account.message}</div>
+      
+    }
   }
 
   render() {
@@ -47,10 +56,12 @@ class AuthForm extends Component {
           <Button onClick={this.login}>Log In</Button>
           <span> or </span>
           <Button onClick={this.signup}>Sign Up</Button>
+          <br></br>
+          {this.Error}
         </div>
       </div>
     )
   }
 }
 
-export default connect(null, { signup })(AuthForm);
+export default connect(({ account }) => ({ account }), { signup })(AuthForm);
