@@ -22,3 +22,19 @@ export const signup = ({ username, password }) => dispatch => {
   }))
 }
 
+export const logout = () => dispatch => {
+  dispatch({ type: ACCOUNT.FETCH });
+
+  return fetch(`${BACKEND.ADDRESS}/account/logout`, {
+    credentials: 'include'
+  }).then(response => response.json())
+  .then(json => {
+    if (json.type === 'error') {
+      dispatch({ type: ACCOUNT.FETCH_ERROR, message: json.message })
+    } else {
+      dispatch({ type: ACCOUNT.FETCH_LOGOUT_SUCCESS, ...json});
+    }
+  })
+  .catch(error => dispatch({ type: ACCOUNT.FETCH_ERROR, message: error.message }))
+}
+
