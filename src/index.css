@@ -18,3 +18,9 @@ body {
 .dragon-avatar-image {
   z-index: 0;
 }
+
+.logout-button {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
