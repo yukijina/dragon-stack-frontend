@@ -5,12 +5,22 @@ import { render } from 'react-dom';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import Root from './components/Root';
-// import { generationActionCreator } from './actions/generation'
+import { fetchAuthenticated } from './actions/account';
 import './index.css';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+
+store.dispatch(fetchAuthenticated())
+.then(() => {
+  render(
+    <Provider store={store}>
+      <Root />
+    </Provider>,
+    document.getElementById('root')
+  );
+})
 
 /// subscribe should be called before dispatch
 //store.subscribe(() => console.log('store state update: ', store.getState()));
@@ -33,9 +43,4 @@ const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 //   store.dispatch(generationActionCreator(json.generation))
 // });
 
-render(
-  <Provider store={store}>
-    <Root />
-  </Provider>,
-  document.getElementById('root')
-);
+

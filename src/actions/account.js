@@ -47,3 +47,9 @@ export const logout = () => fetchFromAccount({
   options: { credentials: 'include' },
   SUCCESS_TYPE: ACCOUNT.FETCH_LOGOUT_SUCCESS
 });
+
+export const fetchAuthenticated = () => fetchFromAccount({
+  endpoint: 'authenticated',
+  options: { credentials: 'include '},
+  SUCCESS_TYPE: ACCOUNT.FETCH_AUTHENTIATED_SUCCESS
+})
