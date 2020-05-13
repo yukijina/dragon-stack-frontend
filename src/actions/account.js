@@ -8,7 +8,7 @@ export const fetchFromAccount = ({
   ERROR_TYPE, 
   SUCCESS_TYPE 
 }) => dispatch => {
-  dispatch({ type: ACCOUNT.FETCH });
+  dispatch({ type: FETCH_TYPE });
 
   return fetch(`${BACKEND.ADDRESS}/account/${endpoint}`, options)
   .then(response => response.json())
