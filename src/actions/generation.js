@@ -20,5 +20,6 @@ export const fetchGeneration = () => dispatch => {
   })
   .catch(err => dispatch({ 
     type: GENERATION.FETCH_ERROR, 
-    message: err.message }))
+    message: err.message 
+  }))
 }
