@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchAccountDragons } from '../actions/accountDragons';
 import AccountDragonRow from './AccountDragonRow';
 
@@ -17,11 +18,12 @@ class AccountDragons extends Component {
             return (
               <div key={dragon.dragonId}>
                 <AccountDragonRow dragon={dragon} />
-                <hr></hr>
+                <hr />
               </div>
             )
           })
         }
+        <Link to='/'>Home</Link>
       </div>
     )
   }
