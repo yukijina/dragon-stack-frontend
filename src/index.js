@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { Router, Switch, Route, Redirect } from'react-router-dom';
@@ -17,13 +17,12 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
-class RedirectToAccountDragons extends Component {
-  render() {
+const RedirectToAccountDragons = () => {
     return (
       <Redirect to={{ pathname: '/account-dragons '}} />
     )
-  }
 }
+
 
 store.dispatch(fetchAuthenticated())
 .then(() => {
