@@ -18,8 +18,26 @@ class AccountDragonRow extends Component {
     this.setState({ edit: !this.state.edit})
   }
 
+  save = () => {
+    fetch(`${BACKEND.ADDRESS}/dragon/update`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        dragonId: this.props.dragon.dragonId, nickname: this.state.nickname
+      })
+    }).then(response => response.json())
+    .then(json => {
+      if(json.type === 'error') {
+        alert(json.message);
+      } else {
+        this.toggleEdit();
+      }
+    })
+    .catch(error => alert(error.message))
+  }
+
   get SaveButton() {
-    return <Button>Save</Button>
+    return <Button onClick={this.save}>Save</Button>
   }
 
   get EditButton() {
