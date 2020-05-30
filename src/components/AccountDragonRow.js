@@ -26,12 +26,12 @@ class AccountDragonRow extends Component {
         dragonId: this.props.dragon.dragonId, nickname: this.state.nickname
       })
     }).then(response => response.json())
-    .then(json => {
-      if(json.type === 'error') {
-        alert(json.message);
-      } else {
-        this.toggleEdit();
-      }
+      .then(json => {
+        if(json.type === 'error') {
+         alert(json.message);
+        } else {
+         this.toggleEdit();
+        }
     })
     .catch(error => alert(error.message))
   }
@@ -48,7 +48,7 @@ class AccountDragonRow extends Component {
     return (
       <div>
         <div>{this.props.dragon.nickname}</div>
-        <input type="text" value={this,state.nickname} onChange={this.updateNickname} disabled={!this.state.edit} />
+        <input type="text" value={this.state.nickname} onChange={this.updateNickname} disabled={!this.state.edit} />
         <br />
         <DragonAvatar dragon={this.props.dragon} />
         { 
