@@ -1,5 +1,5 @@
-import { fetchFormAccount, fetchFromAccount } from './account';
-import { ACOOUNT_INFO, ACCOUNT_INFO } from './types';
+import { fetchFromAccount } from './account';
+import { ACCOUNT_INFO } from './types';
 
 
 export const fetchAccountInfo  = () => fetchFromAccount({
