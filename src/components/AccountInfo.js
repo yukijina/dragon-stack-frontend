@@ -8,7 +8,6 @@ class AccountInfo extends Component {
   }
 
   render() {
-    console.log('component', this.props.accountInfo)
     return (
       <div>
         <h3>Account Info</h3>

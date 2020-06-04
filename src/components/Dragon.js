@@ -9,11 +9,11 @@ class Dragon extends Component {
     return (
       <div>
         {/* <Button onClick={() => this.fetchDragon()}>New Dragon</Button> - this is also ok but refactor below*/}
-        <Button onClick={this.fetchDragon}>New Dragon</Button>
+        <Button onClick={this.props.fetchDragon}>New Dragon</Button>
         <DragonAvatar dragon={this.props.dragon} />
       </div>
     )
   }
 }
 
-export default connect(({ dragon }) => ({ dragon }), { fetchDragon})(Dragon);
+export default connect(({ dragon }) => ({ dragon }), { fetchDragon })(Dragon);

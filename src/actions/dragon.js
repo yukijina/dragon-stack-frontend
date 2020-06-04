@@ -3,7 +3,6 @@ import { BACKEND } from '../config';
 
 export const fetchDragon = () => dispatch => {
   dispatch({ type: DRAGON.FETCH });
-
   return fetch(`${BACKEND.ADDRESS}/dragon/new`, {
     //this allows to send sessionString to the backend
     credentials: 'include'   
