@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import DragonAvatar from './DragonAvatar';
+import { BACKEND } from '../config';
 
 class AccountDragonRow extends Component {
   state = {
     nickname: this.props.dragon.nickname,
+    isPublic: this.props.dragon.isPublic,
+    setValue: this.props.dragon.setValue,
     edit: false
   };
 
@@ -12,6 +15,14 @@ class AccountDragonRow extends Component {
     this.setState({
       nickname: event.target.value
     })
+  }
+
+  updateSetValue = event => {
+    this.setState({ setValue: event.target.value })
+  }
+
+  updateIsPublic = event => {
+    this.setState({ isPublic: event.target.checked })
   }
 
   toggleEdit = () => {
@@ -23,7 +34,10 @@ class AccountDragonRow extends Component {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        dragonId: this.props.dragon.dragonId, nickname: this.state.nickname
+        dragonId: this.props.dragon.dragonId, 
+        nickname: this.state.nickname,
+        isPublic: this.state.isPublic,
+        setValue: this.state.setValue
       })
     }).then(response => response.json())
       .then(json => {
@@ -51,9 +65,27 @@ class AccountDragonRow extends Component {
         <input type="text" value={this.state.nickname} onChange={this.updateNickname} disabled={!this.state.edit} />
         <br />
         <DragonAvatar dragon={this.props.dragon} />
-        { 
-          this.state.edit ? this.SaveButton : this.EditButton
-        }
+        <div>
+          <span>
+            Set Value: {' '}
+            <input 
+              type="number" 
+              disabled={!this.state.edit} 
+              value={this.state.setValue} 
+              onChange={this.updateSetValue} 
+            />  
+          </span>{' '}
+          <span>
+            Public: {' '}
+            <input 
+              type="checkbox" 
+              disabled={!this.state.edit} 
+              value={this.state.isPublic}
+              onChange={this.updateIsPublic}
+            />  
+          </span>
+          { this.state.edit ? this.SaveButton : this.EditButton}
+        </div>
       </div>
     )
   }
