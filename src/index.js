@@ -17,11 +17,6 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
-// const RedirectToAccountDragons = () => {
-//     return (
-//       <Redirect to={{ pathname: '/account-dragons '}} />
-//     )
-// }
 
 const AuthRoute = props => {
   if(!store.getState().account.loggedIn) {
