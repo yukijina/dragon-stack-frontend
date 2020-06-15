@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPublicDragons } from '../actions/publicDragons';
 import { Link } from 'react-router-dom';
+import PublicDragonRow from './PublicDragonRow';
 
 class publicDragons extends Component {
   componentDidMount() {
@@ -12,6 +13,16 @@ class publicDragons extends Component {
     return (
       <div>
         <h3>Public Dragons</h3>
+        {
+          this.props.publicDragons.dragons.map(dragon => {
+            return (
+              <div key={dragon.dragonId}>
+                <PublicDragonRow dragon={dragon} />
+                <hr />
+              </div>
+            )
+          })
+        }
         <Link to='/'>Home</Link>
       </div>
     )
